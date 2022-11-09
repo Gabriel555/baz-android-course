@@ -10,11 +10,12 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_coin"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"/>
 
@@ -22,17 +23,17 @@
         android:id="@+id/tv_coin_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/iv_coin"
+        app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         android:maxLines="2"
         android:layout_marginHorizontal="8dp"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:textAllCaps="true"
         tools:text="Bitcoin"
-        android:text="@{coin.book}"/>
+        android:gravity="center"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@id/guideline"
@@ -41,7 +42,7 @@
         app:layout_constraintGuide_percent="0.40"
         android:orientation="vertical"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <!--androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_txt_maximum_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -118,6 +119,6 @@
         android:textStyle="bold"
         android:textAllCaps="true"
         tools:text="900"
-        android:gravity="center"/>
+        android:gravity="center"/-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

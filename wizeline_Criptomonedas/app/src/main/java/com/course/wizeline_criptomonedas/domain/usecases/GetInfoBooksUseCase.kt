@@ -7,6 +7,6 @@ class GetInfoBooksUseCase {
 
     private val repository = InfoBookRepository()
 
-    suspend operator fun invoke() : InfoBookModel = repository.getInfoBooks()
+    suspend operator fun invoke(book : String) : InfoBookModel = repository.getInfoBooks(book = book)
 
 }

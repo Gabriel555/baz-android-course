@@ -13,7 +13,9 @@
         android:theme="@style/Theme.Wizeline_Criptomonedas">
         <activity
             android:name=".ui.view.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

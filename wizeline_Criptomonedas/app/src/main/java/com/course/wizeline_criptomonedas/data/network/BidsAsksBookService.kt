@@ -9,9 +9,10 @@ import retrofit2.Response
 class BidsAsksBookService {
     private val retrofit = RetrofitHelper.getRetrofit()
 
-    suspend fun getBidsAsksBooks(): BidsAsksBookModel {
+    suspend fun getBidsAsksBooks(book: String): BidsAsksBookModel {
         return withContext(Dispatchers.IO){
-            val response: Response<BidsAsksBookModel> = retrofit.create(BookApiClient::class.java).getBidsAsksBooks()
+            val response: Response<BidsAsksBookModel> = retrofit.create(
+                BookApiClient::class.java).getBidsAsksBooks(book = book)
             response.body()!!
         }
 

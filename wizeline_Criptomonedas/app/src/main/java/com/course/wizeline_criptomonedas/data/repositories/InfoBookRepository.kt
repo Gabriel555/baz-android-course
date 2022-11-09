@@ -8,8 +8,8 @@ class InfoBookRepository {
 
     private val api = InfoBookService()
 
-    suspend fun getInfoBooks() : InfoBookModel {
-        val response: InfoBookModel = api.getInfoBooks()
+    suspend fun getInfoBooks(book : String) : InfoBookModel {
+        val response: InfoBookModel = api.getInfoBooks(book = book)
         InfoBookProvider.infoBook = response
         return response
     }

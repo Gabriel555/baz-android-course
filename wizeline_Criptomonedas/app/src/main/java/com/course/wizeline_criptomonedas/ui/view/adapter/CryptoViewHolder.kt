@@ -7,15 +7,16 @@ import com.course.wizeline_criptomonedas.databinding.ItemCoinBinding
 
 class CryptoViewHolder(view:View) : RecyclerView.ViewHolder(view) {
 
-    val binding = ItemCoinBinding.bind(view)
+    private val binding = ItemCoinBinding.bind(view)
 
-    fun render(crypto: CryptoModel, onClickListener: (CryptoModel) -> Unit){
+    fun render(crypto: CryptoModel){
         binding.tvCoinName.text = crypto.book.replace("_mxn","").uppercase()
-        binding.tvMaximumPrice.text = crypto.precioMaximo
-        binding.tvMinimunPrice.text = crypto.precioMinimo
-        binding.tvTxtMaximumPrice.isSelected = true
-        binding.tvTxtMinimunPrice.isSelected = true
-        binding.ivCoin.setImageResource(crypto.imagen)
-        itemView.setOnClickListener { onClickListener(crypto) }
+        val id = itemView.context.resources.getIdentifier(
+            "ic_${crypto.book}",
+            "drawable",
+            binding.root.context.packageName
+        )
+        crypto.image = id
+        binding.ivCoin.setImageResource(crypto.image)
     }
 }

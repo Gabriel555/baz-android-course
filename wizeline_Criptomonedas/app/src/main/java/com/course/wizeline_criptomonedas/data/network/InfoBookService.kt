@@ -9,9 +9,10 @@ import retrofit2.Response
 class InfoBookService {
     private val retrofit = RetrofitHelper.getRetrofit()
 
-    suspend fun getInfoBooks(): InfoBookModel {
+    suspend fun getInfoBooks(book:String): InfoBookModel {
         return withContext(Dispatchers.IO){
-            val response: Response<InfoBookModel> = retrofit.create(BookApiClient::class.java).getInfoBooks()
+            val response: Response<InfoBookModel> = retrofit.create(
+                BookApiClient::class.java).getInfoBooks(book = book)
             response.body()!!
         }
 

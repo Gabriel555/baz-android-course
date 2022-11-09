@@ -8,8 +8,8 @@ class BidsAsksBookRepository {
 
     private val api = BidsAsksBookService()
 
-    suspend fun getBidsAsksBooks() : BidsAsksBookModel {
-        val response: BidsAsksBookModel = api.getBidsAsksBooks()
+    suspend fun getBidsAsksBooks(book : String) : BidsAsksBookModel {
+        val response: BidsAsksBookModel = api.getBidsAsksBooks(book = book)
         BidsAsksBookProvider.bidsAsksBook = response
         return response
     }

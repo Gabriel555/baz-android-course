@@ -7,6 +7,6 @@ class GetBidsAsksBooksUseCase {
 
     private val repository = BidsAsksBookRepository()
 
-    suspend operator fun invoke() : BidsAsksBookModel = repository.getBidsAsksBooks()
+    suspend operator fun invoke(book : String) : BidsAsksBookModel = repository.getBidsAsksBooks(book = book)
 
 }

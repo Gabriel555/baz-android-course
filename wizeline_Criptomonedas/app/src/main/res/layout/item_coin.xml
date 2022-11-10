@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_coin"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_coin_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:maxLines="2"
+        android:layout_marginHorizontal="8dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        tools:text="Bitcoin"
+        android:gravity="center"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.40"
+        android:orientation="vertical"/>
+
+    <!--androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_txt_maximum_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="1dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_txt_minimun_price"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        app:drawableTint="@color/black"
+        tools:text="@string/maximum_price"
+        android:text="@string/maximum_price"
+        android:gravity="center_vertical"
+        android:scrollHorizontally= "true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_maximum_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="1dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_txt_maximum_price"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_minimun_price"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:maxLines="1"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        tools:text="1000"
+        app:drawableTint="@color/black"
+        android:gravity="center"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_txt_minimun_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="1dp"
+        app:layout_constraintStart_toEndOf="@id/tv_txt_maximum_price"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        tools:text="@string/minimum_price"
+        android:text="@string/minimum_price"
+        android:scrollHorizontally= "true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_minimun_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:width="1dp"
+        app:layout_constraintStart_toEndOf="@id/tv_maximum_price"
+        app:layout_constraintTop_toBottomOf="@+id/tv_txt_minimun_price"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:maxLines="1"
+        android:layout_marginHorizontal="8dp"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        tools:text="900"
+        android:gravity="center"/-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

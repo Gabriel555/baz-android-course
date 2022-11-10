@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">wizeline_Criptomonedas</string>
+    <string name="maximum_price">maximum price</string>
+    <string name="minimum_price">minimum price</string>
+    <string name="last_price">last price</string>
+    <string name="bids">bids</string>
+    <string name="asks">asks</string>
+</resources>

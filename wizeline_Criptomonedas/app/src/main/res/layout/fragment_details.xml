@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.view.DetailsFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -13,10 +13,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/iv_coin"
         android:width="1dp"
         android:ellipsize="marquee"
         android:gravity="center"
@@ -27,19 +23,37 @@
         android:textAllCaps="true"
         android:textSize="25sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/iv_coin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/maximum_price" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_coin"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_txt_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/llyDetails"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"/>
+        android:layout_marginEnd="25dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toTopOf="@+id/llyDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_txt_title" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/splash_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llyDetails" />
 
     <LinearLayout
         android:id="@+id/llyDetails"
@@ -48,14 +62,15 @@
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_coin">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_txt_maximum_price"
                 android:layout_width="match_parent"
@@ -63,6 +78,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:width="1dp"
                 android:ellipsize="marquee"
                 android:gravity="center_vertical"
@@ -73,8 +89,7 @@
                 android:textAllCaps="true"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="@string/maximum_price"
-                android:layout_weight="1"/>
+                tools:text="@string/maximum_price" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_maximum_price"
@@ -83,14 +98,14 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:width="1dp"
                 android:gravity="center"
                 android:maxLines="1"
                 android:textAllCaps="true"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:text="1000"
-                android:layout_weight="1"/>
+                tools:text="1000" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -107,6 +122,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:width="1dp"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
@@ -116,8 +132,7 @@
                 android:textAllCaps="true"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="@string/minimum_price"
-                android:layout_weight="1"/>
+                tools:text="@string/minimum_price" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_minimun_price"
@@ -126,14 +141,14 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:width="1dp"
                 android:gravity="center"
                 android:maxLines="1"
                 android:textAllCaps="true"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:text="900"
-                android:layout_weight="1"/>
+                tools:text="900" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -149,6 +164,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:width="1dp"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
@@ -158,8 +174,7 @@
                 android:textAllCaps="true"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="@string/last_price"
-                android:layout_weight="1"/>
+                tools:text="@string/last_price" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_last_price"
@@ -168,14 +183,14 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:width="1dp"
                 android:gravity="center"
                 android:maxLines="1"
                 android:textAllCaps="true"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:text="900"
-                android:layout_weight="1"/>
+                tools:text="900" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -183,6 +198,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,8 +206,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:width="1dp"
                 android:ellipsize="marquee"
+                android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
@@ -199,9 +217,7 @@
                 android:textAllCaps="true"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="@string/bids"
-                android:layout_weight="1"
-                android:gravity="center"/>
+                tools:text="@string/bids" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -210,8 +226,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
                 android:width="1dp"
                 android:ellipsize="marquee"
+                android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
@@ -219,36 +237,42 @@
                 android:textAllCaps="true"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="@string/asks"
-                android:layout_weight="1"
-                android:gravity="center"/>
+                tools:text="@string/asks" />
 
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeDetails"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:orientation="horizontal">
+            android:layout_height="250dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_bids"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_bids_asks"
-                tools:itemCount="3"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_asks"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_bids_asks"
-                tools:itemCount="3"
-                android:layout_weight="1"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_bids"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_bids_asks" />
 
-        </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_asks"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_bids_asks" />
+
+            </LinearLayout>
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

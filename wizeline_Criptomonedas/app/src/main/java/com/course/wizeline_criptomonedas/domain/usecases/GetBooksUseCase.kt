@@ -1,21 +1,29 @@
 package com.course.wizeline_criptomonedas.domain.usecases
 
-import com.course.wizeline_criptomonedas.data.model.CryptoModel
+import com.course.wizeline_criptomonedas.data.database.entities.toDatabase
 import com.course.wizeline_criptomonedas.data.repositories.BookRepository
+import com.course.wizeline_criptomonedas.domain.model.Crypto
+import javax.inject.Inject
 
-class GetBooksUseCase {
+class GetBooksUseCase @Inject constructor(
+    private val repository : BookRepository
+) {
 
-    private val repository = BookRepository()
+    suspend operator fun invoke(): List<Crypto> {
+        val cryptos = repository.getAllBooksFromDatabase()
 
-    suspend operator fun invoke(): List<CryptoModel> {
-        val resultBooksFilter = mutableListOf<CryptoModel>()
-        if (!repository.getAllBooks().isNullOrEmpty()){
-            repository.getAllBooks().forEach {
+        return if (cryptos.isNullOrEmpty()){
+            repository.clearCryptos()
+            val resultBooksFilter = mutableListOf<Crypto>()
+            cryptos.forEach {
                 if (it.book.contains("mxn")){
                     resultBooksFilter.add(it)
                 }
             }
+            repository.insertBooks(resultBooksFilter.map { it.toDatabase() })
+            resultBooksFilter.toList()
+        }else{
+            cryptos
         }
-        return resultBooksFilter
     }
 }

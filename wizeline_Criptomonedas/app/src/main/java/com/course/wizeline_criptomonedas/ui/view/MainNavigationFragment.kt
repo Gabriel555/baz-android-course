@@ -5,16 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.course.wizeline_criptomonedas.R
-import com.course.wizeline_criptomonedas.data.model.CryptoModel
 import androidx.navigation.fragment.findNavController
 import com.course.wizeline_criptomonedas.databinding.FragmentMainNavigationBinding
+import com.course.wizeline_criptomonedas.domain.model.Crypto
 import com.course.wizeline_criptomonedas.ui.view.adapter.CryptoAdapter
 import com.course.wizeline_criptomonedas.ui.viewmodel.BitsoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainNavigationFragment : Fragment() {
 
     private lateinit var binding: FragmentMainNavigationBinding
@@ -36,6 +37,12 @@ class MainNavigationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvCoins.adapter = adapter
+        binding.swipe.setProgressBackgroundColorSchemeColor(resources.getColor(R.color.splash_color))
+
+        binding.swipe.setOnRefreshListener {
+            bitsoViewModel.onCreate()
+            binding.swipe.isRefreshing = false
+        }
 
         bitsoViewModel._book_model.observe(viewLifecycleOwner, Observer { cryptoList ->
             adapter.submitList(cryptoList)
@@ -48,7 +55,7 @@ class MainNavigationFragment : Fragment() {
 
     }
 
-    private fun onItemSelected(crypto: CryptoModel){
+    private fun onItemSelected(crypto: Crypto){
         bitsoViewModel.selectItem(crypto)
         findNavController().navigate(R.id.action_mainNavigationFragment_to_detailsFragment)
     }

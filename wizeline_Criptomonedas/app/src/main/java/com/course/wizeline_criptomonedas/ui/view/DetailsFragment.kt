@@ -5,17 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.course.wizeline_criptomonedas.R
 import com.course.wizeline_criptomonedas.databinding.FragmentDetailsBinding
 import com.course.wizeline_criptomonedas.ui.view.adapter.BidsAsksAdapter
-import com.course.wizeline_criptomonedas.ui.view.adapter.CryptoAdapter
 import com.course.wizeline_criptomonedas.ui.viewmodel.BitsoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailsBinding
@@ -38,7 +37,20 @@ class DetailsFragment : Fragment() {
         binding.rvAsks.adapter = adapterasks
         binding.tvTxtMaximumPrice.isSelected = true
         binding.tvTxtMinimunPrice.isSelected = true
+        binding.swipeDetails.setProgressBackgroundColorSchemeColor(resources.getColor(R.color.splash_color))
+
+        binding.swipeDetails.setOnRefreshListener {
+            bitsoViewModel.getInfoBook()
+            binding.swipeDetails.isRefreshing = false
+        }
+
         bitsoViewModel.getInfoBook()
+
+
+        bitsoViewModel.isLoadingDetails.observe(viewLifecycleOwner,Observer{
+            binding.progress.visibility = if (it) View.VISIBLE else View.GONE
+            binding.llyDetails.visibility = if (it) View.INVISIBLE else View.VISIBLE
+        })
 
         bitsoViewModel._data_book_model.observe(viewLifecycleOwner,Observer{
             binding.tvTxtTitle.text = it.infoBook.book.replace("_mxn","").uppercase()
@@ -55,6 +67,7 @@ class DetailsFragment : Fragment() {
         bitsoViewModel._selected_Item.observe(viewLifecycleOwner, Observer {
             binding.ivCoin.setImageResource(it.image)
         })
+
     }
 
 }

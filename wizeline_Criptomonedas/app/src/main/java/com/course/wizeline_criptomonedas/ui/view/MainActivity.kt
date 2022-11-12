@@ -10,7 +10,9 @@ import androidx.navigation.fragment.NavHostFragment
 import com.course.wizeline_criptomonedas.R
 import com.course.wizeline_criptomonedas.databinding.ActivityMainBinding
 import com.course.wizeline_criptomonedas.ui.viewmodel.BitsoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

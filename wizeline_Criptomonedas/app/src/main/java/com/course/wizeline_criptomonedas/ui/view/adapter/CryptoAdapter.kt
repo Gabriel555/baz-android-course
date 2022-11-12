@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.course.wizeline_criptomonedas.R
-import com.course.wizeline_criptomonedas.data.model.CryptoModel
+import com.course.wizeline_criptomonedas.domain.model.Crypto
 
-class CryptoAdapter(private val onClickListener:(CryptoModel) -> Unit) :
-    ListAdapter<CryptoModel,CryptoViewHolder>(DiffUtilCalback) {
+class CryptoAdapter(private val onClickListener:(Crypto) -> Unit) :
+    ListAdapter<Crypto,CryptoViewHolder>(DiffUtilCalback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CryptoViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -22,11 +22,11 @@ class CryptoAdapter(private val onClickListener:(CryptoModel) -> Unit) :
     }
 }
 
-private object DiffUtilCalback : DiffUtil.ItemCallback<CryptoModel>(){
+private object DiffUtilCalback : DiffUtil.ItemCallback<Crypto>(){
 
-    override fun areItemsTheSame(oldItem: CryptoModel, newItem: CryptoModel): Boolean =
+    override fun areItemsTheSame(oldItem: Crypto, newItem: Crypto): Boolean =
         oldItem.book == newItem.book
 
-    override fun areContentsTheSame(oldItem: CryptoModel, newItem: CryptoModel): Boolean =
+    override fun areContentsTheSame(oldItem: Crypto, newItem: Crypto): Boolean =
         oldItem == newItem
 }

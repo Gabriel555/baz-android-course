@@ -1,7 +1,9 @@
 package com.course.wizeline_criptomonedas.data.model
 
-class InfoBookProvider {
-    companion object{
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class InfoBookProvider @Inject constructor() {
         lateinit var infoBook:InfoBookModel
-    }
 }

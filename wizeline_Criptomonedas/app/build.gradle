@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -38,6 +40,8 @@ android {
 ext{
     retrofit_version="2.9.0"
     navigation_version="2.5.3"
+    hilt_version = '2.44'
+    room_version = '2.4.3'
 }
 
 dependencies {
@@ -62,4 +66,12 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navigation_version")
     //Splash
     implementation 'androidx.core:core-splashscreen:1.0.0'
+    //swipeRefreshLayout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    //hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    //Room
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 }

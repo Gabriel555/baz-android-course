@@ -5,34 +5,38 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.course.wizeline_criptomonedas.data.model.BidsAsksBookModel
-import com.course.wizeline_criptomonedas.data.model.CryptoModel
 import com.course.wizeline_criptomonedas.data.model.InfoBookModel
+import com.course.wizeline_criptomonedas.domain.model.Crypto
 import com.course.wizeline_criptomonedas.domain.usecases.GetBidsAsksBooksUseCase
 import com.course.wizeline_criptomonedas.domain.usecases.GetBooksUseCase
 import com.course.wizeline_criptomonedas.domain.usecases.GetInfoBooksUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BitsoViewModel: ViewModel() {
+@HiltViewModel
+class BitsoViewModel @Inject constructor(
+    private val getBooksUseCase : GetBooksUseCase,
+    private val getInfoBooksUseCase : GetInfoBooksUseCase,
+    private val getBidsAsksBooksUseCase : GetBidsAsksBooksUseCase
+): ViewModel() {
 
-    val getBooksUseCase = GetBooksUseCase()
-    val getInfoBooksUseCase = GetInfoBooksUseCase()
-    val getBidsAsksBooksUseCase = GetBidsAsksBooksUseCase()
-
-    private val mutableBookModel = MutableLiveData<List<CryptoModel>?>()
-    val _book_model: MutableLiveData<List<CryptoModel>?> get() = mutableBookModel
-    private val mutableSelectedItem = MutableLiveData<CryptoModel>()
-    val _selected_Item: LiveData<CryptoModel> get() = mutableSelectedItem
+    private val mutableBookModel = MutableLiveData<List<Crypto>?>()
+    val _book_model: MutableLiveData<List<Crypto>?> get() = mutableBookModel
+    private val mutableSelectedItem = MutableLiveData<Crypto>()
+    val _selected_Item: LiveData<Crypto> get() = mutableSelectedItem
     private val mutableDataBookModel = MutableLiveData<InfoBookModel>()
     val _data_book_model: MutableLiveData<InfoBookModel> get() = mutableDataBookModel
     private val mutablebidsAsksModel = MutableLiveData<BidsAsksBookModel>()
     val _bids_asks_model: MutableLiveData<BidsAsksBookModel> get() = mutablebidsAsksModel
 
     val isLoading = MutableLiveData<Boolean>()
+    val isLoadingDetails = MutableLiveData<Boolean>()
 
-    fun selectItem(item: CryptoModel) {
+    fun selectItem(item: Crypto) {
 
         mutableSelectedItem.value = item
 
@@ -56,6 +60,7 @@ class BitsoViewModel: ViewModel() {
     fun getInfoBook() {
 
         CoroutineScope(IO).launch {
+            isLoadingDetails.postValue(true)
             val infoBooksUseCase = async {
                 mutableSelectedItem.value?.let { getInfoBooksUseCase(book = it.book) }
             }
@@ -65,6 +70,7 @@ class BitsoViewModel: ViewModel() {
 
             mutableDataBookModel.postValue(infoBooksUseCase.await())
             mutablebidsAsksModel.postValue(bidsaAsksUseCase.await())
+            isLoadingDetails.postValue(false)
         }
 
     }

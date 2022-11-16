@@ -6,23 +6,23 @@ import com.course.wizeline_criptomonedas.domain.model.Crypto
 import javax.inject.Inject
 
 class GetBooksUseCase @Inject constructor(
-    private val repository : BookRepository
+    private val repository: BookRepository
 ) {
 
     suspend operator fun invoke(): List<Crypto> {
         val cryptos = repository.getAllBooksFromDatabase()
 
-        return if (cryptos.isNullOrEmpty()){
+        return if (cryptos.isNullOrEmpty()) {
             repository.clearCryptos()
             val resultBooksFilter = mutableListOf<Crypto>()
             cryptos.forEach {
-                if (it.book.contains("mxn")){
+                if (it.book.contains("mxn")) {
                     resultBooksFilter.add(it)
                 }
             }
             repository.insertBooks(resultBooksFilter.map { it.toDatabase() })
             resultBooksFilter.toList()
-        }else{
+        } else {
             cryptos
         }
     }

@@ -5,8 +5,7 @@ import com.course.wizeline_criptomonedas.data.repositories.InfoBookRepository
 import javax.inject.Inject
 
 class GetInfoBooksUseCase @Inject constructor(
-    private val repository : InfoBookRepository
+    private val repository: InfoBookRepository
 ) {
-    suspend operator fun invoke(book : String) : InfoBookModel = repository.getInfoBooks(book = book)
-
+    suspend operator fun invoke(book: String): InfoBookModel = repository.getInfoBooks(book = book)
 }

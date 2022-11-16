@@ -18,7 +18,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit():Retrofit{
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(endpoints.END_BITSO)
             .addConverterFactory(GsonConverterFactory.create())
@@ -33,7 +33,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideBookApiClient(retrofit: Retrofit): BookApiClient{
+    fun provideBookApiClient(retrofit: Retrofit): BookApiClient {
         return retrofit.create(BookApiClient::class.java)
     }
 }

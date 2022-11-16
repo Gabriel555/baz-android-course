@@ -13,12 +13,11 @@ import retrofit2.http.Query
 interface BookApiClient {
 
     @GET(END_BOOKS)
-    suspend fun getAllBooks():Response<BookModel>
+    suspend fun getAllBooks(): Response<BookModel>
 
     @GET(END_INFO_BOOKS)
     suspend fun getInfoBooks(@Query("book") book: String): Response<InfoBookModel>
 
     @GET(END_BIDS_ASKS_BOOKS)
-    suspend fun getBidsAsksBooks(@Query("book") book: String):Response<BidsAsksBookModel>
-
+    suspend fun getBidsAsksBooks(@Query("book") book: String): Response<BidsAsksBookModel>
 }

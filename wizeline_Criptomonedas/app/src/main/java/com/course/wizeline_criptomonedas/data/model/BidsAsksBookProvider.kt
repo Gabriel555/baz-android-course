@@ -4,6 +4,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BidsAsksBookProvider @Inject constructor(){
-        lateinit var bidsAsksBook:BidsAsksBookModel
+class BidsAsksBookProvider @Inject constructor() {
+    lateinit var bidsAsksBook: BidsAsksBookModel
 }

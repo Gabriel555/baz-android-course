@@ -19,10 +19,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BitsoViewModel @Inject constructor(
-    private val getBooksUseCase : GetBooksUseCase,
-    private val getInfoBooksUseCase : GetInfoBooksUseCase,
-    private val getBidsAsksBooksUseCase : GetBidsAsksBooksUseCase
-): ViewModel() {
+    private val getBooksUseCase: GetBooksUseCase,
+    private val getInfoBooksUseCase: GetInfoBooksUseCase,
+    private val getBidsAsksBooksUseCase: GetBidsAsksBooksUseCase
+) : ViewModel() {
 
     private val mutableBookModel = MutableLiveData<List<Crypto>?>()
     val _book_model: MutableLiveData<List<Crypto>?> get() = mutableBookModel
@@ -37,9 +37,7 @@ class BitsoViewModel @Inject constructor(
     val isLoadingDetails = MutableLiveData<Boolean>()
 
     fun selectItem(item: Crypto) {
-
         mutableSelectedItem.value = item
-
     }
 
     init {
@@ -47,18 +45,14 @@ class BitsoViewModel @Inject constructor(
     }
 
     fun onCreate() {
-
         viewModelScope.launch {
             isLoading.postValue(true)
             mutableBookModel.postValue(getBooksUseCase())
             isLoading.postValue(false)
         }
-
     }
 
-
     fun getInfoBook() {
-
         CoroutineScope(IO).launch {
             isLoadingDetails.postValue(true)
             val infoBooksUseCase = async {
@@ -72,6 +66,5 @@ class BitsoViewModel @Inject constructor(
             mutablebidsAsksModel.postValue(bidsaAsksUseCase.await())
             isLoadingDetails.postValue(false)
         }
-
     }
 }

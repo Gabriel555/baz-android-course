@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class BookModel(
 
-    val success:String,
+    val success: String,
 
     @SerializedName("payload")
-    val crypto:List<CryptoModel>
-    )
+    val crypto: List<CryptoModel>
+)

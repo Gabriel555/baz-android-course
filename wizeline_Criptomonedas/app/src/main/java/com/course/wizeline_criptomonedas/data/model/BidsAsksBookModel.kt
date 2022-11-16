@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class BidsAsksBookModel(
 
-    val success:String,
+    val success: String,
 
     @SerializedName("payload")
-    val infoBidsAsks:BidsAsksBookInfoModel
+    val infoBidsAsks: BidsAsksBookInfoModel
 
-    )
+)

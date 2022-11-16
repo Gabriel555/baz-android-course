@@ -9,13 +9,12 @@ import javax.inject.Inject
 
 class BookService @Inject constructor(
     private val retrofit: BookApiClient
-){
+) {
 
-    suspend fun getBooks(): List<CryptoModel>{
-        return withContext(Dispatchers.IO){
+    suspend fun getBooks(): List<CryptoModel> {
+        return withContext(Dispatchers.IO) {
             val response: Response<BookModel> = retrofit.getAllBooks()
             response.body()?.crypto ?: emptyList()
         }
-
     }
 }

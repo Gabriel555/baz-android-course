@@ -1,10 +1,10 @@
 package com.course.wizeline_criptomonedas.ui.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.course.wizeline_criptomonedas.R
@@ -18,13 +18,14 @@ import java.text.DecimalFormat
 class DetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailsBinding
-    private val bitsoViewModel : BitsoViewModel by activityViewModels()
+    private val bitsoViewModel: BitsoViewModel by activityViewModels()
     private val adapterbids = BidsAsksAdapter()
     private val adapterasks = BidsAsksAdapter()
     private val dec = DecimalFormat("#,###.##")
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailsBinding.inflate(layoutInflater)
@@ -46,28 +47,37 @@ class DetailsFragment : Fragment() {
 
         bitsoViewModel.getInfoBook()
 
+        bitsoViewModel.isLoadingDetails.observe(
+            viewLifecycleOwner,
+            Observer {
+                binding.progress.visibility = if (it) View.VISIBLE else View.GONE
+                binding.llyDetails.visibility = if (it) View.INVISIBLE else View.VISIBLE
+            }
+        )
 
-        bitsoViewModel.isLoadingDetails.observe(viewLifecycleOwner,Observer{
-            binding.progress.visibility = if (it) View.VISIBLE else View.GONE
-            binding.llyDetails.visibility = if (it) View.INVISIBLE else View.VISIBLE
-        })
+        bitsoViewModel._data_book_model.observe(
+            viewLifecycleOwner,
+            Observer {
+                binding.tvTxtTitle.text = it.infoBook.book.replace("_mxn", "").uppercase()
+                binding.tvMaximumPrice.text = "$ ${dec.format(it.infoBook.high.toFloat())}"
+                binding.tvMinimunPrice.text = "$ ${dec.format(it.infoBook.low.toFloat())}"
+                binding.tvLastPrice.text = "$ ${dec.format(it.infoBook.last.toFloat())}"
+            }
+        )
 
-        bitsoViewModel._data_book_model.observe(viewLifecycleOwner,Observer{
-            binding.tvTxtTitle.text = it.infoBook.book.replace("_mxn","").uppercase()
-            binding.tvMaximumPrice.text = "$ ${dec.format(it.infoBook.high.toFloat())}"
-            binding.tvMinimunPrice.text = "$ ${dec.format(it.infoBook.low.toFloat())}"
-            binding.tvLastPrice.text = "$ ${dec.format(it.infoBook.last.toFloat())}"
-        })
+        bitsoViewModel._bids_asks_model.observe(
+            viewLifecycleOwner,
+            Observer {
+                adapterasks.submitList(it.infoBidsAsks.asks)
+                adapterbids.submitList(it.infoBidsAsks.bids)
+            }
+        )
 
-        bitsoViewModel._bids_asks_model.observe(viewLifecycleOwner, Observer {
-            adapterasks.submitList(it.infoBidsAsks.asks)
-            adapterbids.submitList(it.infoBidsAsks.bids)
-        })
-
-        bitsoViewModel._selected_Item.observe(viewLifecycleOwner, Observer {
-            binding.ivCoin.setImageResource(it.image)
-        })
-
+        bitsoViewModel._selected_Item.observe(
+            viewLifecycleOwner,
+            Observer {
+                binding.ivCoin.setImageResource(it.image)
+            }
+        )
     }
-
 }

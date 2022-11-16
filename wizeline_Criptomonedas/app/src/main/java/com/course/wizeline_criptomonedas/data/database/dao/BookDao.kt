@@ -13,9 +13,8 @@ interface BookDao {
     suspend fun getAllBooks(): List<CryptoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(books:List<CryptoEntity>)
+    suspend fun insertAll(books: List<CryptoEntity>)
 
     @Query("DELETE FROM crypto_table")
     suspend fun deleteAllQuotes()
-
 }

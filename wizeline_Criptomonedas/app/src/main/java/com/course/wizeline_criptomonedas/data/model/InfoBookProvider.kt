@@ -5,5 +5,5 @@ import javax.inject.Singleton
 
 @Singleton
 class InfoBookProvider @Inject constructor() {
-        lateinit var infoBook:InfoBookModel
+    lateinit var infoBook: InfoBookModel
 }

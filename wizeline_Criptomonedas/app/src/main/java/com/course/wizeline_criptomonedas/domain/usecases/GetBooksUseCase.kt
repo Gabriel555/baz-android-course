@@ -10,9 +10,9 @@ class GetBooksUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): List<Crypto> {
-        val cryptos = repository.getAllBooksFromDatabase()
+        val cryptos: List<Crypto>? = try { repository.getAllBooksFromApi() } catch (e: Exception) { emptyList() }
 
-        return if (cryptos.isNullOrEmpty()) {
+        return if (!cryptos.isNullOrEmpty()) {
             repository.clearCryptos()
             val resultBooksFilter = mutableListOf<Crypto>()
             cryptos.forEach {
@@ -21,9 +21,9 @@ class GetBooksUseCase @Inject constructor(
                 }
             }
             repository.insertBooks(resultBooksFilter.map { it.toDatabase() })
-            resultBooksFilter.toList()
+            repository.getAllBooksFromDatabase()
         } else {
-            cryptos
+            repository.getAllBooksFromDatabase()
         }
     }
 }

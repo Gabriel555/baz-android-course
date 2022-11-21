@@ -6,6 +6,7 @@ import com.course.wizeline_criptomonedas.data.model.InfoBookModel
 import com.course.wizeline_criptomonedas.data.utils.endpoints.END_BIDS_ASKS_BOOKS
 import com.course.wizeline_criptomonedas.data.utils.endpoints.END_BOOKS
 import com.course.wizeline_criptomonedas.data.utils.endpoints.END_INFO_BOOKS
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,7 +14,7 @@ import retrofit2.http.Query
 interface BookApiClient {
 
     @GET(END_BOOKS)
-    suspend fun getAllBooks(): Response<BookModel>
+    fun getAllBooks(): Single<BookModel>
 
     @GET(END_INFO_BOOKS)
     suspend fun getInfoBooks(@Query("book") book: String): Response<InfoBookModel>

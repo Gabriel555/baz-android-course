@@ -4,13 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.course.wizeline_criptomonedas.data.database.entities.toDatabase
 import com.course.wizeline_criptomonedas.data.model.BidsAsksBookModel
 import com.course.wizeline_criptomonedas.data.model.InfoBookModel
+import com.course.wizeline_criptomonedas.data.repositories.BookRepository
 import com.course.wizeline_criptomonedas.domain.model.Crypto
+import com.course.wizeline_criptomonedas.domain.model.toDomain
 import com.course.wizeline_criptomonedas.domain.usecases.GetBidsAsksBooksUseCase
-import com.course.wizeline_criptomonedas.domain.usecases.GetBooksUseCase
 import com.course.wizeline_criptomonedas.domain.usecases.GetInfoBooksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
@@ -19,10 +24,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BitsoViewModel @Inject constructor(
-    private val getBooksUseCase: GetBooksUseCase,
+    private val bookRepository: BookRepository,
     private val getInfoBooksUseCase: GetInfoBooksUseCase,
     private val getBidsAsksBooksUseCase: GetBidsAsksBooksUseCase
 ) : ViewModel() {
+    private val compositeDisposable = CompositeDisposable()
 
     private val mutableBookModel = MutableLiveData<List<Crypto>?>()
     val _book_model: MutableLiveData<List<Crypto>?> get() = mutableBookModel
@@ -47,7 +53,23 @@ class BitsoViewModel @Inject constructor(
     fun onCreate() {
         viewModelScope.launch {
             isLoading.postValue(true)
-            mutableBookModel.postValue(getBooksUseCase())
+            compositeDisposable.add(
+                bookRepository.getAllBooksFromApi()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ cryptos ->
+                        suspend { bookRepository.clearCryptos() }
+                        val resultBooksFilter = mutableListOf<Crypto>()
+                        cryptos.forEach {
+                            if (it.book.contains("mxn")) {
+                                resultBooksFilter.add(it.toDomain())
+                            }
+                        }
+                        suspend { bookRepository.insertBooks(resultBooksFilter.map { it.toDatabase() }) }
+                    }, {
+                    })
+            )
+            mutableBookModel.postValue(bookRepository.getAllBooksFromDatabase())
             isLoading.postValue(false)
         }
     }
@@ -66,5 +88,10 @@ class BitsoViewModel @Inject constructor(
             mutablebidsAsksModel.postValue(bidsaAsksUseCase.await())
             isLoadingDetails.postValue(false)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
     }
 }

@@ -23,7 +23,7 @@ class GetBooksUseCaseTest {
         getBooksUseCase = GetBooksUseCase(repository = repository)
     }
 
-    @Test
+    /*@Test
     fun `cuando el api no devuelve datos entonces se obtienen de la Base de Datos`() = runBlocking {
         // Given
         coEvery { repository.getAllBooksFromApi() } returns emptyList()
@@ -48,5 +48,5 @@ class GetBooksUseCaseTest {
         coVerify(exactly = 1) { repository.clearCryptos() }
         coVerify(exactly = 1) { repository.insertBooks(any()) }
         coVerify(exactly = 1) { repository.getAllBooksFromDatabase() }
-    }
+    }*/
 }
